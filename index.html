@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Embu Rentals – Find Your Perfect Home in Embu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style id="app-style">
+        :root {
+            --primary: #4ade80;
+            --secondary: #38bdf8;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --bg-light: #f8fafc;
+            --bg-dark: #1e293b;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-primary);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Header Styles */
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        /* Hero Section Styles */
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://cdn.pixabay.com/photo/2016/11/18/17/46/house-1836070_1280.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+        
+        .search-bar {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            width: 100%;
+            max-width: 600px;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            outline: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .search-bar:focus {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Property Card Styles */
+        .property-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .property-img {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3cbe70;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 222, 128, 0.4);
+        }
+        
+        /* Property Details Styles */
+        .property-details-img {
+            height: 400px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: #f3f4f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        /* Comparison Table Styles */
+        .comparison-table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .comparison-table th {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #f3f4f6;
+        }
+        
+        .comparison-table tr:nth-child(odd) {
+            background-color: white;
+        }
+        
+        .comparison-table td {
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .check-icon {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        /* Homestead Section Styles */
+        .homestead {
+            background-color: #f0fdf4;
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        
+        /* Login / Sign Up Styles */
+        .auth-modal {
+            max-width: 400px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+        }
+        
+        .auth-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: border 0.3s ease;
+        }
+        
+        .auth-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        /* Footer Styles */
+        .footer {
+            background-color: #f3f4f6;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            z-index: 200;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            padding: 2rem;
+        }
+        
+        .mobile-menu.open {
+            right: 0;
+        }
+        
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 199;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .menu-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .comparison-table-container {
+                overflow-x: auto;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .mobile-nav-toggle {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="header">
+        <div class="container px-4 py-3 mx-auto flex justify-between items-center">
+            <a href="javascript:void(0)" class="flex items-center space-x-3">
+                <div class="bg-gradient-to-r from-green-400 to-blue-400 text-white font-bold p-2 rounded-lg">ER</div>
+                <span class="text-xl font-semibold">Embu Rentals</span>
+            </a>
+            
+            <nav class="desktop-nav">
+                <ul class="flex space-x-6">
+                    <li><a href="javascript:void(0)" onclick="showPage('home-page')" class="nav-link">Home</a></li>
+<li><a href="javascript:void(0)" onclick="showPage('about-page')" class="nav-link">About Us</a></li>
+<li><a href="javascript:void(0)" onclick="showPage('contact-page')" class="nav-link">Contact</a></li>
+<li><a href="javascript:void(0)" onclick="showPage('faq-page')" class="nav-link">FAQ / Help</a></li>
+<li><a href="javascript:void(0)" onclick="showPage('property-page')" class="nav-link">Property</a></li>
+<button id="auth-button" class="btn-primary px-4 py-2">Login</button>
+
+               </ul>
+            </nav>
+            
+            <button class="mobile-nav-toggle md:hidden">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <div class="menu-overlay"></div>
+    <div class="mobile-menu">
+        <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center space-x-3">
+                <div class="bg-gradient-to-r from-green-400 to-blue-400 text-white font-bold p-2 rounded-lg">ER</div>
+                <span class="text-xl font-semibold">Embu Rentals</span>
+            </div>
+            <button class="mobile-menu-close">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        
+        <nav>
+            <ul class="space-y-4">
+                <li><a href="javascript:void(0)" onclick="showPage('home-page')" class="nav-link">Home</a></li>
+<li><a onclick="showPage('home-page')" class="block py-2">Home</a></li>
+<li><a onclick="showPage('about-page')" class="block py-2">About Us</a></li>
+<li><a onclick="showPage('contact-page')" class="block py-2">Contact</a></li>
+<li><a onclick="showPage('faq-page')" class="block py-2">FAQ / Help</a></li>
+<li><a onclick="showPage('property-page')" class="block py-2">Property</a></li>
+<li><a href="javascript:void(0)" id="auth-button-mobile">Login</a></li>
+
+           </ul>
+        </nav>
+    </div>
+
+    <div id="app">
+        <!-- Home Page -->
+        <div id="home-page" class="page active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Find Your Perfect Home in Embu</h1>
+                <p class="text-xl mb-8 max-w-2xl">Browse through our selection of quality apartments and houses at affordable prices</p>
+                <input type="text" placeholder="Search properties in Embu..." class="search-bar mb-10">
+            </section>
+            
+            <!-- Featured Properties -->
+            <section class="container mx-auto py-16 px-4">
+                <h2 class="text-3xl font-bold mb-2">Featured Properties</h2>
+                <p class="text-gray-600 mb-8">Explore our handpicked selection of properties</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Property Card 1 -->
+                    <div class="property-card">
+                        <img src="https://cdn.pixabay.com/photo/2016/11/18/17/46/house-1836070_1280.jpg" alt="Property" class="property-img w-full">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-semibold">Sunrise Apartments</h3>
+                                <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-sm">1BR</span>
+                            </div>
+                            <p class="text-gray-600 mb-3">Modern one bedroom apartment near Embu University</p>
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-map-marker-alt text-green-500 mr-2"></i>
+                                <span class="text-gray-600">University Road, Embu</span>
+                            </div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-green-600 font-bold text-xl">KSh 25,000/mo</span>
+                            </div>
+                            <button class="btn-primary w-full">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Property Card 2 -->
+                    <div class="property-card">
+                        <img src="https://cdn.pixabay.com/photo/2014/07/10/17/18/large-home-389271_1280.jpg" alt="Property" class="property-img w-full">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-semibold">Green Valley Estate</h3>
+                                <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-sm">2BR</span>
+                            </div>
+                            <p class="text-gray-600 mb-3">Spacious two bedroom apartment with beautiful garden view</p>
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-map-marker-alt text-green-500 mr-2"></i>
+                                <span class="text-gray-600">Dallas, Embu Town</span>
+                            </div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-green-600 font-bold text-xl">KSh 35,000/mo</span>
+                            </div>
+                            <button class="btn-primary w-full">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Property Card 3 -->
+                    <div class="property-card">
+                        <img src="https://cdn.pixabay.com/photo/2018/01/26/08/15/dining-room-3108037_1280.jpg" alt="Property" class="property-img w-full">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-semibold">Blue Heights</h3>
+                                <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-sm">Bedsitter</span>
+                            </div>
+                            <p class="text-gray-600 mb-3">Cozy bedsitter perfect for students and young professionals</p>
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-map-marker-alt text-green-500 mr-2"></i>
+                                <span class="text-gray-600">Nthambo, Embu</span>
+                            </div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-green-600 font-bold text-xl">KSh 12,000/mo</span>
+                            </div>
+                            <button class="btn-primary w-full">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Property Card 1 -->
+                    <div class="property-card">
+                        <img src="https://media.istockphoto.com/id/488120139/photo/modern-real-estate.jpg?s=1024x1024&w=is&k=20&c=UrKkZnZYm4O146XzgU6HAuvSK8RxCyJWkznmhZSEKPQ=" alt="Property" class="property-img w-full">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-semibold">Sunset Apartments</h3>
+                                <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-sm">1BR</span>
+                            </div>
+                            <p class="text-gray-600 mb-3">Modern one bedroom apartment near Embu University</p>
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-map-marker-alt text-green-500 mr-2"></i>
+                                <span class="text-gray-600">Meru Road, Embu</span>
+                            </div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-green-600 font-bold text-xl">KSh 28,000/mo</span>
+                            </div>
+                            <button class="btn-primary w-full">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Property Card 2 -->
+                    <div class="property-card">
+                        <img src="https://media.istockphoto.com/id/511138945/photo/modern-real-estate.jpg?s=612x612&w=0&k=20&c=jXJxkRgp4CEjC1NMUQo2BwqhPXs5ApNQtwB3oNz1Zrw=" alt="Property" class="property-img w-full">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-semibold">Blue Valley Estate</h3>
+                                <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-sm">2BR</span>
+                            </div>
+                            <p class="text-gray-600 mb-3">Spacious two bedroom apartment with beautiful garden view</p>
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-map-marker-alt text-green-500 mr-2"></i>
+                                <span class="text-gray-600">Kangaru, Embu Town</span>
+                            </div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-green-600 font-bold text-xl">KSh 40,000/mo</span>
+                            </div>
+                            <button class="btn-primary w-full">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Property Card 3 -->
+                    <div class="property-card">
+                        <img src="https://media.istockphoto.com/id/2184952903/photo/new-houses-construction-new-residential-building.jpg?s=612x612&w=0&k=20&c=xiH0ZP9UpTp7NOR9CXkT8BxKedtcxlXr9_fwFhbL0uQ=" alt="Property" class="property-img w-full">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-semibold">Jeru Heights</h3>
+                                <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-sm">Bedsitter</span>
+                            </div>
+                            <p class="text-gray-600 mb-3">Classic bedsitter perfect for students and young professionals</p>
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-map-marker-alt text-green-500 mr-2"></i>
+                                <span class="text-gray-600">G TOWN, Embu</span>
+                            </div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-green-600 font-bold text-xl">KSh 15,000/mo</span>
+                            </div>
+                            <button class="btn-primary w-full">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Homestead Section -->
+            <section class="homestead container mx-auto py-12 px-4 my-10">
+                <h2 class="text-3xl font-bold mb-3 text-center">Homestead Amenities</h2>
+                <p class="text-gray-600 text-center mb-8 max-w-2xl mx-auto">Our estates offer comfort, safety, and lifestyle amenities for all tenants.</p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                    <!-- Amenity 1 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm flex flex-col items-center text-center hover:shadow-md transition-shadow duration-300">
+                        <div class="feature-icon mb-4">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h3 class="font-semibold">Parking Lot</h3>
+                        <p class="text-gray-600 text-sm mt-1">Secure parking for residents</p>
+                    </div>
+                    
+                    <!-- Amenity 2 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm flex flex-col items-center text-center hover:shadow-md transition-shadow duration-300">
+                        <div class="feature-icon mb-4">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <h3 class="font-semibold">Water Supply</h3>
+                        <p class="text-gray-600 text-sm mt-1">Constant clean water</p>
+                    </div>
+                    
+                    <!-- Amenity 3 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm flex flex-col items-center text-center hover:shadow-md transition-shadow duration-300">
+                        <div class="feature-icon mb-4">
+                            <i class="fas fa-tree"></i>
+                        </div>
+                        <h3 class="font-semibold">Small Park</h3>
+                        <p class="text-gray-600 text-sm mt-1">Green space for relaxation</p>
+                    </div>
+                    
+                    <!-- Amenity 4 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm flex flex-col items-center text-center hover:shadow-md transition-shadow duration-300">
+                        <div class="feature-icon mb-4">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <h3 class="font-semibold">Playground</h3>
+                        <p class="text-gray-600 text-sm mt-1">Safe area for children</p>
+                    </div>
+                    
+                    <!-- Amenity 5 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm flex flex-col items-center text-center hover:shadow-md transition-shadow duration-300">
+                        <div class="feature-icon mb-4">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="font-semibold">24/7 Security</h3>
+                        <p class="text-gray-600 text-sm mt-1">Round-the-clock protection</p>
+                    </div>
+                    
+                    <!-- Amenity 6 -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm flex flex-col items-center text-center hover:shadow-md transition-shadow duration-300">
+                        <div class="feature-icon mb-4">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <h3 class="font-semibold">Gym</h3>
+                        <p class="text-gray-600 text-sm mt-1">Where available</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Property Details Page -->
+        <div id="property-details-page" class="page hidden">
+            <div class="container mx-auto py-12 px-4">
+                <button class="flex items-center text-green-600 mb-6 hover:text-green-700 transition duration-300 back-button">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Back to properties
+                </button>
+                
+                <img src="https://cdn.pixabay.com/photo/2016/11/18/17/46/house-1836070_1280.jpg" alt="Property" class="property-details-img mb-8">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2">
+                        <h1 class="text-3xl font-bold mb-3">Sunrise Apartments</h1>
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-map-marker-alt text-green-500 mr-2"></i>
+                            <span class="text-gray-600">University Road, near Embu University</span>
+                        </div>
+                        <p class="text-2xl text-green-600 font-bold mb-6">KSh 25,000/month</p>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-sm mb-8">
+                            <h2 class="text-xl font-semibold mb-4">Description</h2>
+                            <p class="text-gray-600">
+                                This beautiful 1 bedroom apartment offers modern living in a prime location near Embu University. The apartment features a spacious layout with plenty of natural light, a modern kitchen with quality appliances, and a cozy bedroom with built-in wardrobes. The property is well-maintained and secure, providing comfortable living for students and professionals alike.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-xl shadow-sm">
+                            <h2 class="text-xl font-semibold mb-4">Features & Amenities</h2>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                                <!-- Feature 1 -->
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-shower"></i>
+                                    </div>
+                                    <span class="font-medium">Hot Shower</span>
+                                </div>
+                                
+                                <!-- Feature 2 -->
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-tint"></i>
+                                    </div>
+                                    <span class="font-medium">Water</span>
+                                </div>
+                                
+                                <!-- Feature 3 -->
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <span class="font-medium">Electricity</span>
+                                </div>
+                                
+                                <!-- Feature 4 -->
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <span class="font-medium">Security</span>
+                                </div>
+                                
+                                <!-- Feature 5 -->
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-car"></i>
+                                    </div>
+                                    <span class="font-medium">Parking</span>
+                                </div>
+                                
+                                <!-- Feature 6 -->
+                                <div class="flex flex-col items-center text-center">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-umbrella-beach"></i>
+                                    </div>
+                                    <span class="font-medium">Balcony</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm sticky top-24">
+                            <h2 class="text-xl font-semibold mb-4">Contact Owner</h2>
+                            <form>
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2">Your Name</label>
+                                    <input type="text" class="auth-input" placeholder="Enter your name">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2">Email Address</label>
+                                    <input type="email" class="auth-input" placeholder="Enter your email">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2">Phone Number</label>
+                                    <input type="tel" class="auth-input" placeholder="Enter your phone number">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-gray-700 mb-2">Message</label>
+                                    <textarea class="auth-input" rows="4" placeholder="I'm interested in this property..."></textarea>
+                                </div>
+                                <button type="button" class="btn-primary w-full py-3">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category Comparison Table -->
+                <div class="mt-16">
+                    <h2 class="text-2xl font-bold mb-6">Compare Property Categories</h2>
+                    <div class="comparison-table-container">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Features</th>
+                                    <th>Single</th>
+                                    <th>Bedsitter</th>
+                                    <th>1 Bedroom</th>
+                                    <th>2 Bedroom</th>
+                                    <th>3 Bedroom</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Hot shower</td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Electricity</td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Water</td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Security</td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Gym</td>
+                                    <td><i class="fas fa-times text-gray-400"></i></td>
+                                    <td><i class="fas fa-times text-gray-400"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Swimming pool</td>
+                                    <td><i class="fas fa-times text-gray-400"></i></td>
+                                    <td><i class="fas fa-times text-gray-400"></i></td>
+                                    <td><i class="fas fa-times text-gray-400"></i></td>
+                                    <td><i class="fas fa-times text-gray-400"></i></td>
+                                    <td><i class="fas fa-check check-icon"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Login Page -->
+        <div id="login-page" class="page hidden">
+            <div class="container mx-auto py-16 px-4">
+                <div class="auth-modal p-8 mx-auto">
+                    <h2 class="text-2xl font-bold mb-1">Welcome to Embu Rentals</h2>
+                    <p class="text-gray-600 mb-6">Sign in to find your next home.</p>
+                    
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Email Address</label>
+                            <input type="email" class="auth-input" placeholder="Enter your email">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 mb-2">Password</label>
+                            <input type="password" class="auth-input" placeholder="Enter your password">
+                        </div>
+                        <button type="button" class="btn-primary w-full py-3 mb-4">Login</button>
+                        <p class="text-center text-gray-600">Don't have an account? <a href="javascript:void(0)" id="show-signup" class="text-green-600 font-medium hover:text-green-700">Create one</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sign Up Page -->
+        <div id="signup-page" class="page hidden">
+            <div class="container mx-auto py-16 px-4">
+                <div class="auth-modal p-8 mx-auto">
+                    <h2 class="text-2xl font-bold mb-1">Create an Account</h2>
+                    <p class="text-gray-600 mb-6">Join Embu Rentals to find your perfect home.</p>
+                    
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Full Name</label>
+                            <input type="text" class="auth-input" placeholder="Enter your name">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Email Address</label>
+                            <input type="email" class="auth-input" placeholder="Enter your email">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Phone Number</label>
+                            <input type="tel" class="auth-input" placeholder="Enter your phone number">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 mb-2">Password</label>
+                            <input type="password" class="auth-input" placeholder="Create a password">
+                        </div>
+                        <button type="button" class="btn-primary w-full py-3 mb-4">Sign Up</button>
+                        <p class="text-center text-gray-600">Already have an account? <a href="javascript:void(0)" id="show-login" class="text-green-600 font-medium hover:text-green-700">Login</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- About Us Page -->
+<div id="about-page" class="page hidden">
+    <div class="container mx-auto py-12 px-4">
+        <h1 class="text-3xl font-bold mb-4">About Embu Rentals</h1>
+        <p class="text-gray-700 leading-relaxed">
+            Embu Rentals is a modern digital platform helping residents, students and professionals find
+            affordable, verified, and secure rental homes within Embu County. We focus on convenience,
+            transparency, and giving you access to quality property listings such as singles, bedsitters,
+            1–3 bedroom units, and homesteads.
+        </p>
+        <p class="mt-4 text-gray-700">
+            Our mission is to simplify the rental search experience while connecting landlords and tenants
+            through a fast, trusted, and user-friendly system.
+        </p>
+    </div>
+</div>
+
+<!-- Contact Page -->
+<div id="contact-page" class="page hidden">
+    <div class="container mx-auto py-12 px-4">
+        <h1 class="text-3xl font-bold mb-6">Contact Us</h1>
+        <p class="text-gray-700 mb-8">We’re here to assist you anytime.</p>
+        
+        <div class="max-w-lg p-6 bg-white rounded-xl shadow-sm">
+            <p class="mb-3"><strong>Phone:</strong> +254 712 345 678</p>
+            <p class="mb-3"><strong>Email:</strong> info@emburentals.com</p>
+            <p class="mb-3"><strong>Location:</strong> Embu Town, Kenya</p>
+
+            <h3 class="text-xl font-semibold mt-6 mb-3">Send a Message</h3>
+            <input class="auth-input mb-3" type="text" placeholder="Your name">
+            <input class="auth-input mb-3" type="email" placeholder="Your email">
+            <textarea class="auth-input mb-3" rows="4" placeholder="Your message"></textarea>
+            <button class="btn-primary w-full py-3">Send</button>
+        </div>
+    </div>
+</div>
+
+<!-- FAQ Page -->
+<div id="faq-page" class="page hidden">
+    <div class="container mx-auto py-12 px-4">
+        <h1 class="text-3xl font-bold mb-6">FAQ / Help</h1>
+        
+        <div class="space-y-6">
+            <div>
+                <h3 class="font-semibold text-xl">How do I search for properties?</h3>
+                <p class="text-gray-600">Use the search bar on the homepage to filter rentals in Embu.</p>
+            </div>
+
+            <div>
+                <h3 class="font-semibold text-xl">How accurate are the listings?</h3>
+                <p class="text-gray-600">All listings are verified before appearing on the platform.</p>
+            </div>
+
+            <div>
+                <h3 class="font-semibold text-xl">Do you offer homesteads?</h3>
+                <p class="text-gray-600">Yes. Homestead is treated as a full standalone category separate from singles, bedsitters, and apartments.</p>
+            </div>
+
+            <div>
+                <h3 class="font-semibold text-xl">How do I contact a property owner?</h3>
+                <p class="text-gray-600">Open a property and use the contact form on the right side.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Properties Page -->
+<div id="property-page" class="page hidden">
+    <div class="container mx-auto py-12 px-4">
+        <h1 class="text-3xl font-bold mb-4">All Properties</h1>
+        <p class="text-gray-700 mb-8">Browse a wider list of available rentals in Embu.</p>
+
+        <p class="text-gray-500">You can later fetch real data from your backend.</p>
+    </div>
+</div>
+
+    </div>
+    
+    <!-- Login/Sign Up Modal Trigger Button -->
+    <button id="auth-button" class="btn-primary px-4 py-2">Login</button>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Embu Rentals</h3>
+                    <p class="text-gray-600 mb-4">Find your perfect home in Embu with our wide selection of quality properties.</p>
+                    <p class="text-gray-600">© 2025 Embu Rentals. All rights reserved.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><a href="javascript:void(0)" onclick="showPage('home-page')" class="nav-link">Home</a></li>
+<li><a href="javascript:void(0)" onclick="showPage('about-page')" class="nav-link">About Us</a></li>
+<li><a href="javascript:void(0)" onclick="showPage('contact-page')" class="nav-link">Contact</a></li>
+<li><a href="javascript:void(0)" onclick="showPage('faq-page')" class="nav-link">FAQ / Help</a></li>
+<li><a href="javascript:void(0)" onclick="showPage('property-page')" class="nav-link">Property</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Contact Us</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-green-500 mr-3"></i>
+                            <span>+254 712 345 678</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-green-500 mr-3"></i>
+                            <span>info@emburentals.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-green-500 mr-3"></i>
+                            <span>Embu Town, Kenya</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="flex space-x-4 mt-4">
+                        <a href="javascript:void(0)" class="text-gray-600 hover:text-green-500 transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="text-gray-600 hover:text-green-500 transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="text-gray-600 hover:text-green-500 transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script id="app-script">
+        // ========================
+        // NAVIGATION
+        // ========================
+        const navToggle = document.querySelector('.mobile-nav-toggle');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const menuOverlay = document.querySelector('.menu-overlay');
+
+        navToggle?.addEventListener('click', () => {
+            mobileMenu?.classList.add('open');
+            menuOverlay?.classList.add('open');
+        });
+
+        document.querySelector('.mobile-menu-close')?.addEventListener('click', () => {
+            mobileMenu?.classList.remove('open');
+            menuOverlay?.classList.remove('open');
+        });
+
+        menuOverlay?.addEventListener('click', () => {
+            mobileMenu?.classList.remove('open');
+            menuOverlay?.classList.remove('open');
+        });
+
+        // ========================
+        // PAGE NAVIGATION
+        // ========================
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.add('hidden');
+                page.classList.remove('active');
+            });
+
+            const page = document.getElementById(pageId);
+            page?.classList.remove('hidden');
+            page?.classList.add('active');
+
+            window.scrollTo(0, 0);
+        }
+
+        // ========================
+        // PROPERTY DETAILS
+        // ========================
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            if (button.textContent.trim() === 'View Details') {
+                button.addEventListener('click', () => {
+                    showPage('property-details-page');
+                });
+            }
+        });
+
+        // BACK BUTTON
+        document.querySelector('.back-button')?.addEventListener('click', () => {
+            showPage('home-page');
+        });
+
+        // AUTH PAGES NAVIGATION
+        document.getElementById('auth-button')?.addEventListener('click', () => {
+            showPage('login-page');
+        });
+
+        document.getElementById('show-signup')?.addEventListener('click', () => {
+            showPage('signup-page');
+        });
+
+        document.getElementById('show-login')?.addEventListener('click', () => {
+            showPage('login-page');
+        });
+
+        // ========================
+        // SAMPLE API
+        // ========================
+        const API = {
+            getProperties() {
+                return Promise.resolve({ message: "This is a prototype." });
+            },
+            getPropertyDetails(id) {
+                return Promise.resolve({ message: "This is a prototype." });
+            },
+            contactOwner(data) {
+                return Promise.resolve({ message: "This is a prototype." });
+            },
+            login(credentials) {
+                return Promise.resolve({ message: "This is a prototype." });
+            },
+            signup(userData) {
+                return Promise.resolve({ message: "This is a prototype." });
+            }
+        };
+
+        // ========================
+        // SIGNUP & LOGIN SUCCESS
+        // ========================
+
+        // SIGN UP SUCCESS
+        document.querySelector('#signup-page .btn-primary')?.addEventListener('click', () => {
+            alert("Account created successfully!");
+            showPage('login-page'); // Redirect to login page
+        });
+
+        // LOGIN SUCCESS
+        document.querySelector('#login-page .btn-primary')?.addEventListener('click', () => {
+            alert("Login successful!");
+            showPage('home-page'); // Redirect to home page
+        });
+    </script>
+</body>
+</html>
